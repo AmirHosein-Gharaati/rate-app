@@ -2,9 +2,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import PostSerializer, PostCreateSerializer
+from .serializers import PostSerializer, PostCreateSerializer, RatingCreateSerializer, RatingSerializer
 from .models import Post
-from .services import create_post
+from .services import create_post, create_rate
 
 
 class PostView(APIView):
@@ -18,4 +18,18 @@ class PostView(APIView):
         if serializer.is_valid():
             post = create_post(title=serializer.validated_data.get('title'))
             return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RateView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        serializer = RatingCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            rate = create_rate(
+                user_id=serializer.validated_data.get('user_id'),
+                post_id=serializer.validated_data.get('post'),
+                score=serializer.validated_data.get('score')
+            )
+            return Response(RatingSerializer(rate).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
