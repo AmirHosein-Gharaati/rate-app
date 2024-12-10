@@ -1,11 +1,21 @@
-from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
-from .serializers import PostSerializer
+from rest_framework.views import APIView
+
+from .serializers import PostSerializer, PostCreateSerializer
 from .models import Post
+from .services import create_post
 
 
-@api_view(['GET'])
-def get_posts(request):
-    posts = Post.objects.all()
-    serializer = PostSerializer(posts, many=True)
-    return Response(serializer.data)
+class PostView(APIView):
+    def get(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = PostCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            post = create_post(title=serializer.validated_data.get('title'))
+            return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
