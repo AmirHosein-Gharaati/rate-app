@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from .serializers import PostSerializer, PostCreateSerializer, RatingCreateSerializer, RatingSerializer
 from .models import Post
 from .services import create_post, handle_rating
+from .tasks import compute_rating_averages
 
 
 class PostView(APIView):
@@ -34,3 +35,11 @@ class RateView(APIView):
             score=serializer.validated_data.get('score')
         )
         return Response(RatingSerializer(rate).data, status=status.HTTP_201_CREATED)
+
+
+# TODO: should use async schedular for triggering the computation
+class RatingAverageView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        compute_rating_averages()
+        return Response({"message": "successful"}, status=status.HTTP_200_OK)
