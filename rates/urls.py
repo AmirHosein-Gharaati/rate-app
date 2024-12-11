@@ -3,6 +3,6 @@ from django.urls import path
 from rates.views import PostView, RateView
 
 urlpatterns = [
-    path('posts', PostView.as_view(), name='posts'),
-    path('rates', RateView.as_view(), name='rates'),
+    path('post', PostView.as_view(), name='post'),
+    path('rate', RateView.as_view(), name='rate'),
 ]
