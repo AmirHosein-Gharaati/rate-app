@@ -22,7 +22,13 @@ def compute_rating_averages():
         average = round(rating_sum / count, 2)
 
         rating_averages.append(
-            RatingAverage(post=post, rate_average=average, from_time=one_minute_ago, to_time=now)
+            RatingAverage(
+                post=post,
+                rate_average=average,
+                from_time=one_minute_ago,
+                to_time=now,
+                user_count=count
+            )
         )
 
     RatingAverage.objects.bulk_create(rating_averages)
