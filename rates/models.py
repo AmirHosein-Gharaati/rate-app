@@ -14,3 +14,10 @@ class Rating(models.Model):
     score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class RatingAverage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    rate_average = models.FloatField()
+    from_time = models.DateTimeField()
+    to_time = models.DateTimeField()
