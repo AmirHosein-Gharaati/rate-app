@@ -9,6 +9,8 @@ def compute_rating_averages():
     now = datetime.datetime.now()
     one_minute_ago = now - datetime.timedelta(minutes=1)
 
+    rating_averages = []
+
     for post in posts:
         ratings = Rating.objects.filter(post=post, updated_at__gte=one_minute_ago)
 
@@ -19,6 +21,8 @@ def compute_rating_averages():
         rating_sum = sum(rating.score for rating in ratings)
         average = round(rating_sum / count, 2)
 
-        RatingAverage.objects.create(
-            post=post, rate_average=average, from_time=one_minute_ago, to_time=now
+        rating_averages.append(
+            RatingAverage(post=post, rate_average=average, from_time=one_minute_ago, to_time=now)
         )
+
+    RatingAverage.objects.bulk_create(rating_averages)
