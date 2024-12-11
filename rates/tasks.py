@@ -1,5 +1,7 @@
 import datetime
 
+from django.db.models import QuerySet
+
 from rates.models import Post, Rating, RatingAverage
 
 
@@ -32,3 +34,32 @@ def compute_rating_averages():
         )
 
     RatingAverage.objects.bulk_create(rating_averages)
+
+
+def calculate_weighted_average(averages: QuerySet[RatingAverage]):
+    weighted_sum = 0
+    weight_total = 0
+    weight = 1
+
+    for avg_data in averages:
+        weighted_sum += avg_data.rate_average * weight
+        weight_total += weight
+        weight += 1
+
+    rate_average = round(weighted_sum / weight_total if weight_total else 0, 2)
+
+    return rate_average
+
+
+def handle_updating_post_rating():
+    posts = Post.objects.all()
+
+    for post in posts:
+        averages = RatingAverage.objects.filter(post=post).order_by('-from_time')
+
+        if len(averages) > 0:
+            total_average = calculate_weighted_average(averages)
+
+            post.rate_average = total_average
+            post.user_count = sum(avg.user_count for avg in averages)
+            post.save()
