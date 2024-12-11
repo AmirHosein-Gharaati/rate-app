@@ -61,5 +61,5 @@ def handle_updating_post_rating():
             total_average = calculate_weighted_average(averages)
 
             post.rate_average = total_average
-            post.user_count = sum(avg.user_count for avg in averages)
+            post.user_count = Rating.objects.filter(post=post).count()
             post.save()
