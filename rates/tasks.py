@@ -28,8 +28,7 @@ def compute_rating_averages():
                 post=post,
                 rate_average=average,
                 from_time=one_minute_ago,
-                to_time=now,
-                user_count=count
+                to_time=now
             )
         )
 
