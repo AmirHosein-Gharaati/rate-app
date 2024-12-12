@@ -20,5 +20,4 @@ class Rating(models.Model):
 class RatingAverage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     rate_average = models.FloatField()
-    from_time = models.DateTimeField()
-    to_time = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)

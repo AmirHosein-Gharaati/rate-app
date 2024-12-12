@@ -1,4 +1,5 @@
 import datetime
+from collections import defaultdict
 
 from django.db.models import QuerySet
 
@@ -7,20 +8,16 @@ from rates.services import calculate_weighted_average
 
 
 def handle_computing_rating_averages():
-    posts = Post.objects.all()
+    ratings = Rating.objects.select_related('post').filter(computed=False)
 
-    now = datetime.datetime.now()
-    one_minute_ago = now - datetime.timedelta(minutes=1)
+    grouped_ratings = defaultdict(list)
+    for rating in ratings:
+        grouped_ratings[rating.post].append(rating)
 
     rating_averages = []
 
-    for post in posts:
-        ratings = Rating.objects.filter(post=post, updated_at__gte=one_minute_ago)
-
-        count = len(ratings)
-        if count == 0:
-            continue
-
+    for post, rating_list in grouped_ratings.items():
+        count = len(rating_list)
         rating_sum = sum(rating.score for rating in ratings)
         average = round(rating_sum / count, 2)
 
@@ -28,12 +25,11 @@ def handle_computing_rating_averages():
             RatingAverage(
                 post=post,
                 rate_average=average,
-                from_time=one_minute_ago,
-                to_time=now
             )
         )
 
     RatingAverage.objects.bulk_create(rating_averages)
+    ratings.update(computed=True)
 
 
 def handle_updating_post_rating():
