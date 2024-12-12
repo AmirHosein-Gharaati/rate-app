@@ -6,8 +6,8 @@ export const options = {
     scenarios: {
         normal_load: {
             executor: 'constant-vus',
-            vus: 500, // Number of virtual users
-            duration: '1m', // Test duration
+            vus: 200, // Number of virtual users
+            duration: '5m', // Test duration
         },
     },
 };
