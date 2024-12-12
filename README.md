@@ -130,3 +130,23 @@ maybe more code.
 - Pagination can be implemented for high number of records (like paging the posts).
 - Celery Beat is configured to do 2 tasks every minute, but we can think about how often is good for processing high number of objects to
 prevent the high cpu and memory usage.
+
+### Sample result
+Using both k6 simulation and some changes manually in the script, this is a sample result related to the algorithm we have
+simulated in the about 6 minutes:
+
+Normal behaviour and user requests:
+![](./assets/1.jpg)
+![](./assets/2.jpg)
+
+Potentially increasing the requests:
+![](./assets/3.jpg)
+
+Reaching high number of users with some of high ratings:
+![](./assets/4.jpg)
+
+High number of requests with high ratings at the last minute:
+![](./assets/5.jpg)
+
+**Note**: some requests at the first time were random, but the last minute was high, so the rating average
+did not change much. Changing the ratings and scores will result a different average.
