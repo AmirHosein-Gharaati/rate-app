@@ -36,6 +36,13 @@ celery -A tasks worker -l info
 celery -A tasks beat -l info
 ```
 
+## API doc
+API documentation can be viewed at http://localhost:8000/api/schema/swagger-ui/
+
+Also, schema yml file can be downloaded at http://localhost:8000/api/schema/
+
+**Note**: more documentation can be included like the DTOs for each api and ...
+
 ## Simulation
 
 ### Database
@@ -103,16 +110,16 @@ and then update it. This takes some effort which in this task we don't accept it
 Also for another solution, we can have some restrictions for the users. For example a user can not add or update a rating for a post more than X times,
 but we don't change any rating average then, and we accept the little change for the overall average. This also can be coordinated with business guys.
 
-### Optimizations
+## Optimizations
 
-#### Database
+### Database
 - An optimization we used is connection pooling. Since the number of requests per second is high and each request
 creates and closes a database connection of Postgres, we can use a pool of connections and prevent the many time creating-closing
 connections. From Django 5.1, connection pooling is support for Postgres: https://docs.djangoproject.com/en/5.1/ref/databases/#connection-pool
 
 - Another optimization can be database indexing. For the specific read queries, we can have simple or compound indexes.
 
-#### Asynchronous tasks
+### Asynchronous tasks
 Since 'computing rating averages' and 'updating post overall rating and users' are some tasks which take some time and 
 may fetch high data, we can not use synchronous django process. Since django is python based and have one process,
 it may block other requests.
@@ -124,14 +131,14 @@ python based applications like Django.
 For the message broker for producing/consuming tasks, we used 'Redis', but other message brokers like RabbitMQ or Kafka are also
 candidates for it but for in this application we don't want to make it complex and redis is a good choice.
 
-#### Other optimizations to consider
+### Other optimizations to consider
 - We can change our queries to avoid multiple queries which can be done via a single query, but also it takes more memory and
 maybe more code.
 - Pagination can be implemented for high number of records (like paging the posts).
 - Celery Beat is configured to do 2 tasks every minute, but we can think about how often is good for processing high number of objects to
 prevent the high cpu and memory usage.
 
-### Sample result
+## Sample result
 Using both k6 simulation and some changes manually in the script, this is a sample result related to the algorithm we have
 simulated in the about 6 minutes:
 
