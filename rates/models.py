@@ -14,6 +14,7 @@ class Rating(models.Model):
     score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    computed = models.BooleanField(default=False)
 
 
 class RatingAverage(models.Model):
