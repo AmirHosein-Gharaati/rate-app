@@ -16,6 +16,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 LOCAL_APPS = [
     'rates',
+    'posts',
     'tasks'
 ]
 

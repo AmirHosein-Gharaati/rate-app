@@ -1,6 +1,7 @@
 from django.urls import path
 
-from rates.views import PostView, RateView, RatingAverageView, CalculateWeightedAverageView
+from posts.views import PostView
+from rates.views import RateView, RatingAverageView, CalculateWeightedAverageView
 
 urlpatterns = [
     path('post', PostView.as_view(), name='post'),
