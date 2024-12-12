@@ -16,7 +16,7 @@ def compute_rate_averages():
 
 @shared_task
 def compute_post_ratings():
-    from rates.tasks import handle_updating_post_rating
+    from posts.tasks import handle_updating_post_rating
 
     log.info("starting updating post ratings")
     handle_updating_post_rating()

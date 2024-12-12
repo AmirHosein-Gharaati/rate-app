@@ -2,24 +2,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import PostSerializer, PostCreateSerializer, RatingCreateSerializer, RatingSerializer
-from .models import Post
-from .services import create_post, handle_rating
-from .tasks import handle_computing_rating_averages, handle_updating_post_rating
-
-
-class PostView(APIView):
-    def get(self, request, *args, **kwargs):
-        posts = Post.objects.all()
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, *args, **kwargs):
-        serializer = PostCreateSerializer(data=request.data)
-        if serializer.is_valid():
-            post = create_post(title=serializer.validated_data.get('title'))
-            return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from .serializers import RatingCreateSerializer, RatingSerializer
+from .services import handle_rating
+from .tasks import handle_computing_rating_averages
 
 
 class RateView(APIView):
@@ -42,11 +27,4 @@ class RatingAverageView(APIView):
 
     def post(self, request, *args, **kwargs):
         handle_computing_rating_averages()
-        return Response({"message": "successful"}, status=status.HTTP_200_OK)
-
-
-# TODO: should use async schedular for triggering the computation
-class CalculateWeightedAverageView(APIView):
-    def post(self, request, *args, **kwargs):
-        handle_updating_post_rating()
         return Response({"message": "successful"}, status=status.HTTP_200_OK)
