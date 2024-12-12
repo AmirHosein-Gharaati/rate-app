@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 from rates.models import Post, Rating, RatingAverage
 
 
-def compute_rating_averages():
+def handle_computing_rating_averages():
     posts = Post.objects.all()
 
     now = datetime.datetime.now()

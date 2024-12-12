@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from .serializers import PostSerializer, PostCreateSerializer, RatingCreateSerializer, RatingSerializer
 from .models import Post
 from .services import create_post, handle_rating
-from .tasks import compute_rating_averages, handle_updating_post_rating
+from .tasks import handle_computing_rating_averages, handle_updating_post_rating
 
 
 class PostView(APIView):
@@ -41,7 +41,7 @@ class RateView(APIView):
 class RatingAverageView(APIView):
 
     def post(self, request, *args, **kwargs):
-        compute_rating_averages()
+        handle_computing_rating_averages()
         return Response({"message": "successful"}, status=status.HTTP_200_OK)
 
 
