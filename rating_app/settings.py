@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from celery.schedules import crontab
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,17 +129,4 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'api.exception_handler.drf_default_with_modifications_exception_handler'
 }
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
-
-CELERY_BEAT_SCHEDULE = {
-    "compute_rate_averages_task": {
-        "task": "tasks.tasks.compute_rate_averages",
-        "schedule": crontab(minute="*/1"),
-    },
-    "compute_post_ratings_task": {
-        "task": "tasks.tasks.compute_post_ratings",
-        "schedule": crontab(minute="*/1"),
-    },
-}
+from tasks.settings import *  # noqa
