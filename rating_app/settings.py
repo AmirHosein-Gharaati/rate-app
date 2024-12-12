@@ -24,6 +24,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'django_celery_beat',
     'rest_framework',
+    'drf_spectacular'
 ]
 
 INSTALLED_APPS = [
@@ -127,7 +128,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'api.exception_handler.drf_default_with_modifications_exception_handler'
+    'EXCEPTION_HANDLER': 'api.exception_handler.drf_default_with_modifications_exception_handler',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 from tasks.settings import *  # noqa
