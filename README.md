@@ -103,11 +103,20 @@ There is an article about how IMDB is calculating scores which is using same ide
 #### Implemented algorithm for abnormal ratings situations
 In this task, we implemented the third idea which is 'Weighted Moving Average'.
 
-Diving into detail about this algorithm, for an interval we compute the rating average for the new ratings received and
-not included in any rating average. For the sake of simplicity the interval in the application is 1 minute, but it can be
-something else in the production for example 6 hours, 1 Day or anything. Then another process, takes the rating averages and
-apply weights for each rating average, then updates rating average and number of users included in the rating averages for a specific
-post.
+Diving into detail, we can compute the new ratings from the users in an interval. Then in another interval
+we can calculate the overall rating of the posts using rating averages we had.
+
+So there are 2 background process:
+1. calculating rating averages based on the new ratings
+2. calculating overall rating average based on the rating averages
+
+**Note**: for the sake of simplicity, we used 1 minute interval for both process, but this
+can be something like 6 hours or 1 day in production.
+
+So the first process computes rating averages based on the new ratings received and
+not included in any rating average. Then the second process, takes the rating averages and
+apply weights for each rating average, then updates rating average and number of users included
+in the rating averages for a specific post.
 
 Note that a user can update the rating for a post, but the new rating also will be included in the new rating average. We may think
 that this may change the overall rating average because a user is included more than two times, but we can talk about the tradeoffs here.
