@@ -50,6 +50,19 @@ API documentation can be viewed at http://localhost:8000/schema/swagger-ui/
 
 Also, schema yml file can be downloaded at http://localhost:8000/schema/
 
+## Test
+Using pytest we can run all the tests in the project.
+
+Make sure the database is running:
+```bash
+docker compose up -d
+```
+
+And then run pytest command:
+```bash
+pytest
+```
+
 ## Simulation
 
 ### Database
