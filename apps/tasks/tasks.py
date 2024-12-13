@@ -9,9 +9,9 @@ log = logging.getLogger(__name__)
 def compute_rate_averages():
     from apps.rates.tasks import handle_computing_rating_averages
 
-    log.info("starting computing")
+    log.info("starting computing rating averages")
     handle_computing_rating_averages()
-    log.info("finished computing")
+    log.info("finished computing rating averages")
 
 
 @shared_task
