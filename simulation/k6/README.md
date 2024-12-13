@@ -4,7 +4,7 @@ https://grafana.com/docs/k6/latest/set-up/install-k6/
 
 **Note**: the random body for sending a rate is for posts from id 1 to 1000. If you
 did not generate 1000 posts you can either create it using the command mentioned in the main
-[README](./../../README.md) file or pass the maximum post id to `generateRandomRate` function.
+[README](./../../README.md) file or change the maximum post id in `config.js`.
 
 You can run the script using command below
 ```bash

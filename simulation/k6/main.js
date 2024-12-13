@@ -1,6 +1,8 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
 
+import {MAXIMUM_POST_ID, BASE_URL} from "./config.js";
+
 export const options = {
     scenarios: {
         random_rating: {
@@ -20,8 +22,8 @@ export const options = {
 };
 
 export function randomRating() {
-    const url = 'http://localhost:8000/api/rate';
-    const payload = generateRandomRate();
+    const url = BASE_URL + '/rate';
+    const payload = generateRandomRate(MAXIMUM_POST_ID);
 
     const params = {
         headers: {
@@ -39,12 +41,12 @@ export function randomRating() {
 }
 
 export function mixedRating() {
-    const url = 'http://localhost:8000/api/rate';
+    const url = BASE_URL + '/rate';
     const isSpecificRating = Math.random() < 0.5; // 50% chance for each type of rating
 
     const payload = isSpecificRating
         ? generateHighRateForPostOneAndTwo()
-        : generateRandomRate();
+        : generateRandomRate(MAXIMUM_POST_ID);
 
     const params = {
         headers: {
