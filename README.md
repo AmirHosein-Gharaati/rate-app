@@ -2,6 +2,8 @@
 
 ## Project setup
 
+### Local
+
 - Setup virtual environment
 
 ```bash
@@ -35,6 +37,13 @@ python manage.py runserver
 celery -A tasks worker -l info
 celery -A tasks beat -l info
 ```
+
+### Production
+In order to run all the project using docker, you can simply run this command:
+```bash
+docker compose -f compose.dev.yml up -d
+```
+
 
 ## API doc
 API documentation can be viewed at http://localhost:8000/api/schema/swagger-ui/
