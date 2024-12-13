@@ -16,9 +16,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 LOCAL_APPS = [
-    'rates',
-    'posts',
-    'tasks'
+    'apps.rates',
+    'apps.posts',
+    'apps.tasks'
 ]
 
 THIRD_PARTY_APPS = [
@@ -133,4 +133,4 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
-from tasks.settings import *  # noqa
+from apps.tasks.settings import *  # noqa

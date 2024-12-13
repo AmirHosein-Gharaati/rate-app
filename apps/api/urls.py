@@ -1,7 +1,7 @@
 from django.urls import path
 
-from posts.views import PostView
-from rates.views import RateView
+from apps.posts.views import PostView
+from apps.rates.views import RateView
 
 urlpatterns = [
     path('post', PostView.as_view(), name='post'),

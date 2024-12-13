@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from rates.models import Rating, RatingAverage
+from apps.rates.models import Rating, RatingAverage
 
 
 def handle_computing_rating_averages():

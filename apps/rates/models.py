@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from posts.models import Post
+from apps.posts.models import Post
 
 
 class Rating(models.Model):

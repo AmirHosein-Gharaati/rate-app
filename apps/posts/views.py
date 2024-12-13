@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema
 
-from posts.models import Post
-from posts.serializers import PostSerializer, PostCreateSerializer
-from posts.services import create_post
+from apps.posts.models import Post
+from apps.posts.serializers import PostSerializer, PostCreateSerializer
+from apps.posts.services import create_post
 
 
 class PostView(APIView):

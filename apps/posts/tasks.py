@@ -1,6 +1,6 @@
-from posts.models import Post
-from posts.services import calculate_weighted_average
-from rates.models import RatingAverage, Rating
+from apps.posts.models import Post
+from apps.posts.services import calculate_weighted_average
+from apps.rates.models import RatingAverage, Rating
 
 
 def handle_updating_post_rating():

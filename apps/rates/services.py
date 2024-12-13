@@ -1,8 +1,8 @@
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
 
-from rates.models import Rating
-from posts.models import Post
+from apps.rates.models import Rating
+from apps.posts.models import Post
 
 
 def handle_rating(post_id: int, score: int, user_id: str) -> QuerySet[Rating]:

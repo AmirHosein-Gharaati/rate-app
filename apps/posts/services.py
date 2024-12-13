@@ -1,7 +1,7 @@
 from django.db.models import QuerySet
 
-from posts.models import Post
-from rates.models import RatingAverage
+from apps.posts.models import Post
+from apps.rates.models import RatingAverage
 
 
 def create_post(title: str) -> QuerySet[Post]:

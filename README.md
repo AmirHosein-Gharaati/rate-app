@@ -34,8 +34,8 @@ python manage.py runserver
 
 - Start Celery/Beat
 ```bash
-celery -A tasks worker -l info
-celery -A tasks beat -l info
+celery -A apps.tasks worker -l info
+celery -A apps.tasks beat -l info
 ```
 
 ### Production
