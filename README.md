@@ -214,5 +214,4 @@ queried the posts using pagination, we can query for the user rates including th
 or maybe helping from joins.
 - Optimize handling posts overall rate average and user counts task to only update posts that have new
 rating averages.
-- Separating the requirements for different environments makes dependencies more precise and cleaner.
 - Add logs to the application
