@@ -1,7 +1,8 @@
-from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from rating_app.env import env, BASE_DIR
+
+env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure--q_08lm)d9k69h0_n_+km=okdk%e_e861yo#2(gv^)brsh14ud'
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'rating_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': []
         ,
         'APP_DIRS': True,
         'OPTIONS': {
