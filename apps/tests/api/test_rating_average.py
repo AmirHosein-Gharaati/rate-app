@@ -15,36 +15,37 @@ from apps.posts.tasks import handle_updating_post_rating
 def test_rating_average_algorithm():
     api_client = APIClient()
     number_of_posts = 100
-    setup_posts(api_client, number_of_posts)
+    post_ids = setup_posts(api_client, number_of_posts)
+    first_post_id = post_ids[0]
 
     url_ = reverse("api:rate")
 
     for i in range(5):
-        send_rating_five_for_all_posts(api_client, number_of_posts, url_)
+        send_rating_five_for_all_posts(api_client, post_ids, url_)
 
         handle_computing_rating_averages()
         handle_updating_post_rating()
 
     for i in range(100):
-        send_zero_or_one_rating_for_post_id_one(api_client, url_)
+        send_zero_or_one_rating(api_client, first_post_id, url_)
 
     handle_computing_rating_averages()
     handle_updating_post_rating()
 
-    post = Post.objects.get(id=1)
+    post = Post.objects.get(id=first_post_id)
 
     assert post.rate_average > 4
 
 
-def send_zero_or_one_rating_for_post_id_one(api_client, url_):
+def send_zero_or_one_rating(api_client, post_id, url_):
     score = random.randint(0, 1)
-    body = generate_rating_with_random_user(1, score)
+    body = generate_rating_with_random_user(post_id, score)
     response = api_client.post(url_, json.dumps(body), content_type="application/json")
     assert response.status_code == 201
 
 
-def send_rating_five_for_all_posts(api_client, number_of_posts, url_):
-    for post_id in range(1, number_of_posts + 1):
+def send_rating_five_for_all_posts(api_client, post_ids, url_):
+    for post_id in post_ids:
         body = generate_rating_with_random_user(post_id, 5)
         response = api_client.post(url_, json.dumps(body), content_type="application/json")
         assert response.status_code == 201
@@ -53,7 +54,12 @@ def send_rating_five_for_all_posts(api_client, number_of_posts, url_):
 def setup_posts(api_client: APIClient, number_of_posts: int):
     url_ = reverse("api:post")
 
+    post_ids = []
+
     for i in range(1, number_of_posts + 1):
         body = {"title": f"Post{i}"}
         response = api_client.post(url_, json.dumps(body), content_type="application/json")
         assert response.status_code == 201
+        post_ids.append(response.data['id'])
+
+    return post_ids
