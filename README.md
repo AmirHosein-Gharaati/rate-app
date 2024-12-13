@@ -128,6 +128,8 @@ connections. From Django 5.1, connection pooling is support for Postgres: https:
 
 - Another optimization can be database indexing. For the specific read queries, we can have simple or compound indexes.
 
+- Pagination is support for GET methods like getting the posts list via limit and offset.
+
 ### Asynchronous tasks
 Since 'computing rating averages' and 'updating post overall rating and users' are some tasks which take some time and 
 may fetch high data, we can not use synchronous django process. Since django is python based and have one process,
@@ -143,7 +145,6 @@ candidates, but for in this application we don't want to make it complex and red
 ### Other optimizations to consider
 - We can change our queries to avoid multiple queries which can be done via a single query, but also it takes more memory and
 maybe more code.
-- Pagination can be implemented for high number of records (like paging the posts).
 - Celery Beat is configured to do 2 tasks every minute, but we can think about how often is good for processing high number of objects to
 prevent the high cpu and memory usage.
 

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema
 
+from apps.api.pagination import get_paginated_response, LimitOffsetPagination
 from apps.posts.models import Post
 from apps.posts.serializers import PostSerializer, PostCreateSerializer
 from apps.posts.services import create_post
@@ -12,9 +13,15 @@ class PostView(APIView):
 
     @extend_schema(responses=PostSerializer)
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all()
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
+        query = Post.objects.order_by('id')
+
+        return get_paginated_response(
+            request=request,
+            pagination_class=LimitOffsetPagination,
+            queryset=query,
+            serializer_class=PostSerializer,
+            view=self
+        )
 
     @extend_schema(responses=PostSerializer, request=PostCreateSerializer)
     def post(self, request, *args, **kwargs):
