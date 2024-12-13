@@ -1,4 +1,4 @@
-# Rating app
+# Rate app
 
 ## Project setup
 
