@@ -1,0 +1,35 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=rating_app.settings.dev
+      - SECRET_KEY='=ug_ucl@yi6^mrcjyz%(u0%&g2adt#bz3@yos%#@*t#t!ypx=a'
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: postgres:14.5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rate_app
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
+
+
+volumes:
+  pgdata:
