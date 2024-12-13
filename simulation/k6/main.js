@@ -61,9 +61,9 @@ export function mixedRating() {
     sleep(Math.random() * 0.5);
 }
 
-function generateRandomRate() {
+function generateRandomRate(maxPostId = 1000) {
     return JSON.stringify({
-        post: Math.floor(Math.random() * 1000) + 1,
+        post: Math.floor(Math.random() * maxPostId) + 1,
         user_id: `device-id-${Math.floor(Math.random() * 1000000) + 1}`,
         score: Math.floor(Math.random() * 6), // Random score from 0 to 5
     });
