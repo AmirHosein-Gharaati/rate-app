@@ -7,8 +7,8 @@
 - Setup virtual environment
 
 ```bash
-virtualenv venv
-source venv/bin/activate
+virtualenv env
+source env/bin/activate
 ```
 
 - Install dependencies
