@@ -212,6 +212,7 @@ did not change much. Changing the ratings and scores will result a different ave
 to the post view GET API if the user rated for the posts we are returning. In this case, when we
 queried the posts using pagination, we can query for the user rates including those posts ids,
 or maybe helping from joins.
-- In the handling posts overall rate average and user counts, we can update only those posts that we know a new
-rating average is computed, and ignore the other posts.
+- Optimize handling posts overall rate average and user counts task to only update posts that have new
+rating averages.
 - Separating the requirements for different environments makes dependencies more precise and cleaner.
+- Add logs to the application
