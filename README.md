@@ -32,7 +32,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-- Start Celery/Beat
+- Start Celery/Beat (make sure the environment is active in your shell)
 ```bash
 celery -A apps.tasks worker -l info
 celery -A apps.tasks beat -l info
