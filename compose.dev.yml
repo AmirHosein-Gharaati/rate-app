@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
+    entrypoint: /app/entrypoint.sh
     environment:
       - DJANGO_SETTINGS_MODULE=rating_app.settings.dev
       - SECRET_KEY='=ug_ucl@yi6^mrcjyz%(u0%&g2adt#bz3@yos%#@*t#t!ypx=a'
