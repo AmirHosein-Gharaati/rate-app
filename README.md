@@ -75,7 +75,7 @@ pytest apps/tests/api/test_rating_average.py
 In order to create 1000 posts using SQL in docker, you can run the
 following command in terminal:
 ```bash
-docker exec -i rating_app-db-1 psql -U postgres -d rate_app <<EOF
+docker exec -i DATABASE_CONTAINER_NAME psql -U postgres -d rate_app <<EOF
 INSERT INTO posts_post (title, rate_average, user_count)
 SELECT 
     CONCAT('Post ', num) AS title,
