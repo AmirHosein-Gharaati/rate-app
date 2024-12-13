@@ -87,7 +87,7 @@ EOF
 ```
 
 ### Users
-Using `Grafana K6` tool, we can simulate the user requests. The script is located in the `simulcation/k6` directory.
+Using `Grafana K6` tool, we can simulate the user requests. The script is located in the `simulation/k6` directory.
 More information about the scenario is mentioned in the k6 [README](./simulation/k6/README.md) file.
 
 ## Implementation
