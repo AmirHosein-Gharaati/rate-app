@@ -1,21 +1,25 @@
 from apps.posts.models import Post
-from apps.posts.services import calculate_weighted_average
-from apps.rates.models import RatingAverage, Rating
+from apps.posts.services import (
+    calculate_weighted_average,
+    get_rating_averages_order_by_created_at,
+    get_ratings_count
+)
 
 
 def handle_updating_post_rating():
+    # TODO: the function can be optimized to only update the posts that have new rating average
     posts = Post.objects.all()
 
     posts_to_update = []
 
     for post in posts:
-        averages = RatingAverage.objects.filter(post=post).order_by('-created_at')
+        averages = get_rating_averages_order_by_created_at(post)
 
         if averages.exists():
             total_average = calculate_weighted_average(averages)
 
             post.rate_average = total_average
-            post.user_count = Rating.objects.filter(post=post, computed=True).count()
+            post.user_count = get_ratings_count(post)
 
             posts_to_update.append(post)
 

@@ -1,11 +1,19 @@
 from django.db.models import QuerySet
 
 from apps.posts.models import Post
-from apps.rates.models import RatingAverage
+from apps.rates.models import RatingAverage, Rating
 
 
 def create_post(title: str) -> QuerySet[Post]:
     return Post.objects.create(title=title)
+
+
+def get_rating_averages_order_by_created_at(post: Post) -> QuerySet[RatingAverage]:
+    return RatingAverage.objects.filter(post=post).order_by('-created_at')
+
+
+def get_ratings_count(post: Post) -> int:
+    return Rating.objects.filter(post=post, computed=True).count()
 
 
 def calculate_weighted_average(averages: QuerySet[RatingAverage]):

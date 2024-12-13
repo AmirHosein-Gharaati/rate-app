@@ -16,3 +16,7 @@ def handle_rating(post_id: int, score: int, user_id: str) -> QuerySet[Rating]:
         rating = Rating.objects.create(post=post, score=score, user_id=user_id)
 
     return rating
+
+
+def get_not_computed_ratings_with_post() -> QuerySet[Rating]:
+    return Rating.objects.select_related('post').filter(computed=False)

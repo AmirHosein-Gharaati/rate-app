@@ -1,10 +1,11 @@
 from collections import defaultdict
 
-from apps.rates.models import Rating, RatingAverage
+from apps.rates.models import RatingAverage
+from apps.rates.services import get_not_computed_ratings_with_post
 
 
 def handle_computing_rating_averages():
-    ratings = Rating.objects.select_related('post').filter(computed=False)
+    ratings = get_not_computed_ratings_with_post()
 
     grouped_ratings = defaultdict(list)
     for rating in ratings:
