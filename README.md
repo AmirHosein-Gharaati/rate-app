@@ -152,7 +152,14 @@ but we don't change any rating average then, and we accept the little change for
 creates and closes a database connection of Postgres, we can use a pool of connections and prevent the many time creating-closing
 connections. From Django 5.1, connection pooling is support for Postgres: https://docs.djangoproject.com/en/5.1/ref/databases/#connection-pool
 
-- Another optimization can be database indexing. For the specific read queries, we can have simple or compound indexes.
+- Another optimization can be database indexing. Based on the specific read queries, we can have simple or compound indexes.
+For example:
+
+```SQL
+CREATE INDEX rates_rating_user_id_index on rates_rating(user_id);
+CREATE INDEX rates_rating_post_id_and_computed_index on rates_rating(post_id, computed);
+CREATE INDEX rates_ratingaverage_post_id_index on rates_ratingaverage(post_id);
+```
 
 - Pagination is support for GET methods like getting the posts list via limit and offset.
 
