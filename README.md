@@ -16,15 +16,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+- Spin off docker compose
+```bash
+docker compose up -d
+```
+
 - Create database
 ```bash
 python manage.py makemigrations
 python manage.py migrate
-```
-
-- Spin off docker compose
-```bash
-docker compose up -d
 ```
 
 - Run the project
