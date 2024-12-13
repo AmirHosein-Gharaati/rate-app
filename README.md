@@ -125,11 +125,11 @@ may fetch high data, we can not use synchronous django process. Since django is 
 it may block other requests.
 
 We should use another tool to process some background or schedule tasks. Since we should assume a production grade product,
-'celery' is used as the background process and schedular. Celery can be scaled in a distributed environment and works perfect with
+`celery` is used as the background process and schedular. Celery can be scaled in a distributed environment and works perfect with
 python based applications like Django.
 
-For the message broker for producing/consuming tasks, we used 'Redis', but other message brokers like RabbitMQ or Kafka are also
-candidates for it but for in this application we don't want to make it complex and redis is a good choice.
+For the message broker we used `Redis`, but other message brokers like `RabbitMQ` or `Kafka` are also
+candidates, but for in this application we don't want to make it complex and redis is a good choice.
 
 ### Other optimizations to consider
 - We can change our queries to avoid multiple queries which can be done via a single query, but also it takes more memory and
