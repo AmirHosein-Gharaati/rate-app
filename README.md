@@ -21,7 +21,7 @@ pip install -r requirements.txt
 docker compose up -d
 ```
 
-- Create database
+- Apply migrations
 ```bash
 python manage.py makemigrations
 python manage.py migrate
