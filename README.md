@@ -152,16 +152,21 @@ Using both k6 simulation and some changes manually in the script, this is a samp
 simulated in the about 6 minutes:
 
 Normal behaviour and user requests:
+
 ![](./assets/1.jpg)
+
 ![](./assets/2.jpg)
 
 Potentially increasing the requests:
+
 ![](./assets/3.jpg)
 
 Reaching high number of users with some of high ratings:
+
 ![](./assets/4.jpg)
 
 High number of requests with high ratings at the last minute:
+
 ![](./assets/5.jpg)
 
 **Note**: some requests at the first time were random, but the last minute was high, so the rating average
