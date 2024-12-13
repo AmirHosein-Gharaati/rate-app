@@ -50,8 +50,6 @@ API documentation can be viewed at http://localhost:8000/schema/swagger-ui/
 
 Also, schema yml file can be downloaded at http://localhost:8000/schema/
 
-**Note**: more documentation can be included like the DTOs for each api and ...
-
 ## Simulation
 
 ### Database
