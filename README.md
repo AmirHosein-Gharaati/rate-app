@@ -63,6 +63,12 @@ And then run pytest command:
 pytest
 ```
 
+The main test showing how implemented algorithm works when high ratings sent to a post is: `apps/tests/api/test_rating_average.py`
+
+```bash
+pytest apps/tests/api/test_rating_average.py
+```
+
 ## Simulation
 
 ### Database
