@@ -205,3 +205,13 @@ High number of requests with high ratings at the last minute:
 
 **Note**: some requests at the first time were random, but the last minute was high, so the rating average
 did not change much. Changing the ratings and scores will result a different average.
+
+
+## TODO
+- There is an ambiguity in the task for myself. I don't know whether we should add the user rate
+to the post view GET API if the user rated for the posts we are returning. In this case, when we
+queried the posts using pagination, we can query for the user rates including those posts ids,
+or maybe helping from joins.
+- In the handling posts overall rate average and user counts, we can update only those posts that we know a new
+rating average is computed, and ignore the other posts.
+- Separating the requirements for different environments makes dependencies more precise and cleaner.
