@@ -129,7 +129,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'api.exception_handler.drf_default_with_modifications_exception_handler',
+    'EXCEPTION_HANDLER': 'apps.api.exception_handler.drf_default_with_modifications_exception_handler',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
