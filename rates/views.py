@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from drf_spectacular.utils import extend_schema
 
 from .serializers import RatingCreateSerializer, RatingSerializer
 from .services import handle_rating
@@ -8,6 +9,7 @@ from .services import handle_rating
 
 class RateView(APIView):
 
+    @extend_schema(responses=RatingSerializer, request=RatingCreateSerializer)
     def post(self, request, *args, **kwargs):
         serializer = RatingCreateSerializer(data=request.data)
         if not serializer.is_valid():
