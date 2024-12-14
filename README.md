@@ -122,9 +122,9 @@ There is an article about how IMDB is calculating scores which is using same ide
 #### Implemented algorithm for abnormal ratings situations
 In this task, we implemented the third idea which is 'Weighted Moving Average'.
 
-Diving into detail, we can compute the new ratings from the users in an interval.
+Diving into detail, we can compute a rating average based on new ratings for a post in an interval. 
 
-Then in another interval we can calculate the overall rating of the posts using rating averages we had:
+Then in another interval we can calculate the overall rating of the posts using rating averages we computed before:
 
 ![](./assets/formula.png)
 
