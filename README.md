@@ -106,7 +106,7 @@ Overall, we have two primary APIs which one is for getting all the posts with re
 and the other is for inserting or updating a user rating for a post.
 
 One situation which we should take care is an abnormal behaviour of users sending ratings.
-Sometimes maybe there will be high load of ratings and unreal ratings (for example ratings with 4 to 5 for a specific post).
+Sometimes maybe there will be high load of ratings and unreal ratings (for example ratings with 0 or 1 for a specific post).
 
 #### Ideas about abnormal ratings situations
 - One simple idea is that we can implement a custom rate-limiter with simple conditions. For example when we detect high load
@@ -122,8 +122,11 @@ There is an article about how IMDB is calculating scores which is using same ide
 #### Implemented algorithm for abnormal ratings situations
 In this task, we implemented the third idea which is 'Weighted Moving Average'.
 
-Diving into detail, we can compute the new ratings from the users in an interval. Then in another interval
-we can calculate the overall rating of the posts using rating averages we had.
+Diving into detail, we can compute the new ratings from the users in an interval.
+
+Then in another interval we can calculate the overall rating of the posts using rating averages we had:
+
+![](./assets/formula.png)
 
 So there are 2 background process:
 1. calculating rating averages based on the new ratings
