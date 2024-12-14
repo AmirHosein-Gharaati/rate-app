@@ -128,6 +128,10 @@ Then in another interval we can calculate the overall rating of the posts using 
 
 ![](./assets/formula.png)
 
+As stated in the idea, we apply lower weight for new rating averages compared to old rating averages.
+For example for the newest rating average we apply weight 1, for second newest 2 and so on. Then we calculate
+average based on the total weights we gave for each.
+
 So there are 2 background process:
 1. calculating rating averages based on the new ratings
 2. calculating overall rating average based on the rating averages
