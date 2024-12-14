@@ -117,7 +117,7 @@ some complexity.
 - Another solution is to use 'Weighted Moving Average'. We can compute averages for the posts in an interval, and then
 give a weight for each average. For the averages that are created recently, we apply lower weight, and for older averages
 we apply higher. This makes the average rating to move harder rather normal average computation.
-There is an article about how IMDB is calculating scores which is using same idea: [Link](https://medium.com/@Howto101/how-to-determine-imdb-scores-57281a6a194e)
+There is an article about how IMDB is calculating scores which is using same idea: https://medium.com/@Howto101/how-to-determine-imdb-scores-57281a6a194e
 
 #### Implemented algorithm for abnormal ratings situations
 In this task, we implemented the third idea which is 'Weighted Moving Average'.
@@ -132,7 +132,7 @@ So there are 2 background process:
 1. calculating rating averages based on the new ratings
 2. calculating overall rating average based on the rating averages
 
-**Note**: for the sake of simplicity, we used 1 minute interval for both process, but this
+**Note**: for the sake of simplicity, we used 1 minute interval for both processes, but this
 can be something like 6 hours or 1 day in production.
 
 So the first process computes rating averages based on the new ratings received and
